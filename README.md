@@ -1,3 +1,16 @@
+# Reuseable React Button Component
+
+## Key featues
+* Centralised styling configuration
+* Button element attribute configuration
+* [Block Element Modifier (BEM)](http://getbem.com/) SASS architecture
+* Bootstrap 4 styling
+* [Material Icons](https://material.io/resources/icons/?style=baseline) baked in
+* Full set of working examples
+* Default OnClick handler class logger
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

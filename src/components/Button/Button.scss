@@ -1,0 +1,300 @@
+//Variables
+$font-family: 'Helvetica Neue', Helvetica, Arial, 'sans';
+
+$darken1: 10%;
+$darken2: 15%;
+$lighten: 30%;
+
+$default: #d1d1d1;
+$default-text-color: #555555;
+
+$btn-text-color-light: #fff;
+$btn-text-color-dark: #212529;
+
+$primary: #007bff;
+$secondary: #6c757d;
+$success: #28a745;
+$danger: #dc3545;
+$warning: #ffc107;
+$info: #17a2b8;
+$light: #f8f9fa;
+$dark: #343a40;
+
+$link: transparent;
+$link-text-color: $primary;
+
+// Mixins
+@mixin btn-style-solid-default($color, $btn-color) {
+    color: $color;
+    background-color: $btn-color;
+    border-color: $btn-color;
+}
+
+@mixin btn-style-solid-hover($color) {
+    background-color: darken($color, $darken1);
+    border-color: darken($color, $darken2);
+}
+
+@mixin btn-style-solid-disabled($color) {
+    background-color: lighten($color, $lighten);
+    border-color: lighten($color, $lighten);
+}
+
+@mixin btn-style-solid($text, $color) {
+    @include btn-style-solid-default($text, $color);
+
+        &:hover {
+            @include btn-style-solid-hover($color);
+        }
+
+        &:active {
+            
+        }
+
+        &:disabled {
+            @include btn-style-solid-disabled($color);
+        }
+}
+
+@mixin btn-style-outline-default($color) {
+    color: $color;
+    background-color: transparent;
+    background-image: none;
+    border-color: $color;
+}
+
+@mixin btn-style-outline-hover($color, $text) {
+    color: $text;
+    background-color: $color;
+    border-color: $color;
+}
+
+@mixin btn-style-outline-disabled($color) {
+    color: lighten($color, $lighten);
+    border-color: lighten($color, $lighten);
+    background-color: transparent;
+}
+
+@mixin btn-style-outline($text, $color) {
+    @include btn-style-outline-default($color);
+
+        &:hover {
+            @include btn-style-outline-hover($color, $text);
+        }
+
+        &:disabled {
+            @include btn-style-outline-disabled($color);
+        }
+}
+
+// Button reset (a la Bootstrap)
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+    border-radius: 0;
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    overflow: visible;
+    text-transform: none;
+    -webkit-appearance: button;
+
+    &:focus {
+        outline: 1px dotted;
+        outline: 5px auto -webkit-focus-ring-color;
+    }
+
+    &:not(:disabled),
+    [type="button"]:not(:disabled),
+    [type="reset"]:not(:disabled),
+    [type="submit"]:not(:disabled) {
+      cursor: pointer;
+    }
+
+    &::-moz-focus-inner,
+    [type="button"]::-moz-focus-inner,
+    [type="reset"]::-moz-focus-inner,
+    [type="submit"]::-moz-focus-inner {
+    padding: 0;
+    border-style: none;
+  }
+}
+
+[role="button"] {
+    cursor: pointer;
+}
+
+// Material Icons
+@import url(//fonts.googleapis.com/icon?family=Material+Icons);
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+.btn {
+    background-color:$default;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    color: $default-text-color;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    padding: .375rem .75rem;
+    text-align: center;
+    transition: all .2s;
+    vertical-align: middle;
+    white-space: nowrap;
+
+    &__label {
+        margin: 0 .5rem;
+    }
+
+    & {
+        .icon-position-right {
+            order: 1;    
+        } 
+    }
+
+    & .icon-position-center + &__label {
+        display: none;
+    }
+
+    &:hover {
+        background-color: darken($default, $darken1);
+        border-color: darken($default, $darken2);
+    }
+
+    &:focus {
+        outline: 0;
+        text-decoration: none;
+    }
+
+    &--primary {
+        @include btn-style-solid($btn-text-color-light, $primary);
+    }
+
+    &--secondary {
+        @include btn-style-solid($btn-text-color-light, $secondary);
+    }
+
+    &--success {
+        @include btn-style-solid($btn-text-color-light, $success);
+    }
+
+    &--danger {
+        @include btn-style-solid($btn-text-color-light, $danger);
+    }
+
+    &--warning {
+        @include btn-style-solid($btn-text-color-dark, $warning);
+    }
+
+    &--info {
+        @include btn-style-solid($btn-text-color-light, $info);
+    }
+
+    &--light {
+        @include btn-style-solid($btn-text-color-dark, $light);
+    }
+
+    &--dark {
+        @include btn-style-solid($btn-text-color-light, $dark);
+    }
+
+    &--link {
+        color: $link-text-color;
+        background-color: $link;
+        border-color: $link;
+        font-weight: 600;
+
+        &:hover {
+            color: darken($link-text-color, $darken1);
+            background-color: $link;
+            border-color: $link;
+            text-decoration: underline;
+        }
+    }
+
+    &--outline-primary {
+        @include btn-style-outline($btn-text-color-light, $primary);
+    }
+
+    &--outline-secondary {
+        @include btn-style-outline($btn-text-color-light, $secondary);
+    }
+
+    &--outline-success {
+        @include btn-style-outline($btn-text-color-light, $success);
+    }
+
+    &--outline-danger {
+        @include btn-style-outline($btn-text-color-light, $danger);
+    }
+
+    &--outline-warning {
+        @include btn-style-outline($btn-text-color-light, $warning);
+    }
+
+    &--outline-info {
+        @include btn-style-outline($btn-text-color-light, $info);
+    }
+
+    &--outline-light {
+        @include btn-style-outline($btn-text-color-dark, $light);
+    }
+
+    &--outline-dark {
+        @include btn-style-outline($btn-text-color-light, $dark);
+    }
+
+    &--radius-square {
+        border-radius: 0;
+    }
+
+    &--radius-round {
+        border-radius: 10rem;
+    }
+
+    &--lg {
+        padding: .5rem 1rem;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        border-radius: .3rem;
+    }
+
+    &--sm {
+        padding: .25rem .5rem;
+        font-size: .875rem;
+        line-height: 1.5;
+        border-radius: .2rem;
+    }
+
+    &--block {
+        justify-content: center;
+        width: 100%;
+    }
+
+}
+
